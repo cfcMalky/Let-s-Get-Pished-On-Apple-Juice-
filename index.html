@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Let's Get Pished On Apple Juice! — Home Brewing Cider Guide</title>
+<meta name="description" content="Learn how to make homemade cider from apple juice at home. Complete guide to home brewing cider with EC-1118 yeast, non-preservative juice, and simple equipment. 4.5L batch yields ~13 bottles.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:    #F5EDD9;
+    --parchment-dk: #EBDfC4;
+    --cream:        #FDF8EE;
+    --orchard:      #3D6B35;
+    --orchard-lt:   #527A49;
+    --cider:        #C17B2C;
+    --cider-lt:     #D4924A;
+    --cider-pale:   #F0C97A;
+    --rust:         #8B3A1F;
+    --bark:         #3B2510;
+    --bark-lt:      #5C3D22;
+    --stone:        #7A6E5E;
+    --stone-lt:     #A89D8C;
+    --foam:         #FFFDF5;
+    --border:       rgba(59,37,16,0.15);
+    --shadow-warm:  0 4px 20px rgba(59,37,16,0.12);
+    --shadow-deep:  0 8px 40px rgba(59,37,16,0.18);
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lora', Georgia, serif;
+    background: var(--parchment);
+    color: var(--bark);
+    line-height: 1.7;
+    font-size: 17px;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--bark);
+    line-height: 1.25;
+    margin-bottom: 10px;
+    margin-top: 0;
+  }
+
+  p { margin-bottom: 1em; }
+
+  /* ── TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.5;
+  }
+
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--bark);
+    color: var(--parchment);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 40px;
+    padding: 72px 0 60px;
+  }
+
+  .header-badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cider-pale);
+    border: 1px solid var(--cider-pale);
+    padding: 5px 12px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.6rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -1px;
+    color: var(--foam);
+  }
+
+  header h1 em {
+    font-style: italic;
+    color: var(--cider-pale);
+  }
+
+  .header-sub {
+    margin-top: 18px;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--stone-lt);
+    max-width: 520px;
+    line-height: 1.6;
+  }
+
+  .header-stats {
+    display: flex;
+    gap: 32px;
+    margin-top: 36px;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--cider-pale);
+    line-height: 1;
+  }
+
+  .stat-lbl {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stone-lt);
+    margin-top: 4px;
+  }
+
+  .header-illustration {
+    opacity: 0.18;
+    flex-shrink: 0;
+  }
+
+  .header-wave {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: var(--parchment);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--orchard);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  }
+
+  .nav-inner {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+
+  nav a {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245,237,217,0.75);
+    text-decoration: none;
+    padding: 14px 20px;
+    white-space: nowrap;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+  }
+
+a { cursor: url("cart.svg") 16 16, pointer; text-decoration: none; }
+
+  .intro-tiles-grid .tile {
+    background: var(--foam);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px;
+  }
+
+  .intro-tiles-grid .tile::after { display: none; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    margin-top: 40px;
+  }
+
+  .section-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cider);
+    white-space: nowrap;
+  }
+
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  .section-intro-box {
+    background: var(--parchment);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 24px 28px;
+    margin-bottom: 30px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-box {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin-top: 20px;
+    box-shadow: none;
+  }
+
+  .section-box .tile-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--rust);
+  }
+
+  .section-box .tile-desc {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 0.875rem;
+    color: var(--stone);
+    line-height: 1.55;
+    font-style: italic;
+    flex: 1;
+  }
+
+  .section-intro-box h2 {
+    margin-bottom: 10px;
+  }
+
+  .section-intro-box .section-intro {
+    margin-bottom: 0;
+  }
+
+  .section-intro {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.05rem;
+    color: var(--stone);
+    margin-bottom: 24px;
+  }
+
+  .tile-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .tile-link:hover {
+    text-decoration: none;
+    cursor: url("cart.svg") 16 16, pointer;
+  }
+
+  .tile-link:hover .tile {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-deep);
+    border-color: var(--cider-lt);
+  }
+
+  .tile-link:hover .tile::after { transform: scaleX(1); }
+
+  .tile .shop-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--orchard);
+    background: var(--parchment);
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-top: auto;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    align-self: flex-start;
+  }
+
+  .tile .shop-btn::after {
+    content: '→';
+  }
+
+  .tile-link:hover .tile .shop-btn {
+    background: var(--orchard);
+    color: var(--foam);
+  }
+
+  .tile {
+    background: var(--foam);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tile::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--orchard), var(--cider));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: left;
+  }
+
+  .tile-img-wrapper {
+    background: #FFFFFF;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+
+  .tile-img-wrapper img {
+    width: 118px;
+    height: 118px;
+    object-fit: contain;
+  }
+
+  .tile-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--rust);
+  }
+
+  .tile-link:hover .tile {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-deep);
+    border-color: var(--cider-lt);
+  }
+
+  .tile-link:hover .tile::after { transform: scaleX(1); }
+
+  .tile-desc {
+    font-size: 0.875rem;
+    color: var(--stone);
+    line-height: 1.55;
+    font-style: italic;
+    flex: 1;
+  }
+
+  /* ── STEPS ── */
+  .steps-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .step-card {
+    display: block;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    transition: all 0.25s;
+  }
+
+  .step-card:last-child { border-bottom: none; }
+
+  .step-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--bark);
+    margin-bottom: 10px;
+    padding-top: 14px;
+  }
+
+  .step-body p {
+    color: var(--stone);
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+  }
+
+  .step-body p:last-child { margin-bottom: 0; }
+
+  .step-body ul {
+    margin: 8px 0 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .step-body ul li {
+    position: relative;
+    padding-left: 20px;
+    font-size: 0.925rem;
+    color: var(--stone);
+    margin-bottom: 6px;
+  }
+
+  .step-body ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--cider);
+    font-weight: 700;
+  }
+
+  /* ── REFERENCE ── */
+  .ref-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .ref-card {
+    background: var(--foam);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .ref-card-header {
+    background: var(--orchard);
+    color: var(--foam);
+    padding: 14px 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ref-card-body {
+    padding: 20px 24px;
+  }
+
+  .ref-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .ref-card ul li {
+    padding: 10px 0 10px 22px;
+    position: relative;
+    font-size: 0.9rem;
+    color: var(--stone);
+    border-bottom: 1px dashed var(--border);
+    line-height: 1.55;
+  }
+
+  .ref-card ul li:last-child { border-bottom: none; }
+
+  .ref-card ul li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    color: var(--cider);
+    font-size: 0.55rem;
+  }
+
+  .ref-card ul li strong {
+    color: var(--bark);
+    font-style: normal;
+  }
+
+  /* ── TABLE ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  thead tr {
+    background: var(--parchment-dk);
+  }
+
+  th {
+    text-align: left;
+    padding: 11px 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bark-lt);
+    border-bottom: 2px solid var(--border);
+  }
+
+  td {
+    padding: 11px 14px;
+    color: var(--stone);
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  tr:nth-child(even) { background: var(--parchment); }
+
+  td:first-child {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--orchard);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  td:nth-child(2) {
+    font-weight: 500;
+    color: var(--bark-lt);
+  }
+
+  /* ── ABV CALLOUT ── */
+  .abv-bar {
+    background: var(--orchard);
+    color: var(--foam);
+    border-radius: 4px;
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+
+  .abv-formula {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.95rem;
+    background: rgba(255,255,255,0.12);
+    padding: 8px 16px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .abv-note {
+    font-style: italic;
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* ── ABV CALCULATOR ── */
+  .abv-calculator {
+    background: var(--foam);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+
+  .calc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--bark);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--orchard);
+    color: var(--foam);
+  }
+
+  .calc-inputs {
+    display: flex;
+    gap: 16px;
+    padding: 20px;
+    flex-wrap: wrap;
+  }
+
+  .calc-input-group {
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .calc-input-group label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 6px;
+  }
+
+  .calc-input-group input {
+    width: 100%;
+    padding: 10px 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 1.1rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--foam);
+    color: var(--bark);
+    transition: border-color 0.2s;
+  }
+
+  .calc-input-group input:focus {
+    outline: none;
+    border-color: var(--orchard);
+  }
+
+  .calc-btn {
+    margin: 0 20px 20px;
+    padding: 10px 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--orchard);
+    color: var(--foam);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .calc-btn:hover {
+    background: var(--orchard-lt);
+  }
+
+  .calc-result {
+    margin: 0 20px 20px;
+    padding: 16px;
+    background: var(--bark);
+    border-radius: 4px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .calc-result.visible {
+    opacity: 1;
+  }
+
+  .calc-result-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--cider-pale);
+  }
+
+  .calc-result-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stone-lt);
+    margin-top: 4px;
+  }
+
+  /* ── INLINE CALCULATOR ── */
+  .inline-calc {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 12px 0;
+    padding: 14px 16px;
+    background: var(--parchment);
+    border-radius: 4px;
+    max-width: 400px;
+  }
+
+  .inline-calc-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .inline-calc-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--stone);
+    min-width: 100px;
+  }
+
+  .inline-input {
+    flex: 1;
+    max-width: 100px;
+    padding: 8px 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: var(--foam);
+    color: var(--bark);
+  }
+
+  .inline-input:focus {
+    outline: none;
+    border-color: var(--orchard);
+  }
+
+  .inline-calc-result {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--orchard);
+    min-width: 70px;
+  }
+
+  .inline-calc-btn {
+    padding: 8px 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    background: var(--orchard);
+    color: var(--foam);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  .inline-calc-btn:hover {
+    background: var(--orchard-lt);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bark);
+    color: var(--stone-lt);
+    text-align: center;
+    padding: 48px 24px;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--cider-pale);
+    margin-bottom: 16px;
+  }
+
+  footer p {
+    font-size: 0.85rem;
+    margin: 6px 0;
+    line-height: 1.6;
+  }
+
+  footer a { color: var(--cider-lt); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* ── DECORATIVE DIVIDER ── */
+  .orchard-divider {
+    text-align: center;
+    color: var(--cider-pale);
+    opacity: 0.4;
+    font-size: 1.2rem;
+    letter-spacing: 0.8em;
+    margin: 0 0 -16px;
+    user-select: none;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .header-inner > * { animation: fadeUp 0.6s ease both; }
+  .header-inner > *:nth-child(2) { animation-delay: 0.15s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .header-illustration { display: none; }
+    .header-inner { grid-template-columns: 1fr; padding: 52px 0 44px; }
+  }
+
+  @media (max-width: 640px) {
+    .intro-panel { padding: 28px 24px; }
+    .header-stats { gap: 20px; }
+    .tile-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+    section { padding: 48px 0; }
+  }
+
+  @media (max-width: 440px) {
+    .tile-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="container">
+    <div class="header-inner">
+      <div>
+        <div class="header-badge">Home Brewing Guide</div>
+<h1>Let's Get<br><em>Pished On Apple Juice!</em></h1>
+<p class="header-sub">The ultimate home brewing cider guide — from Apple Juice to Glass in 6 weeks. No press, no orchard, no PhD required.</p>
+        <div class="header-stats">
+          <div class="stat">
+            <span class="stat-num">4.5L</span>
+            <span class="stat-lbl">Batch Size</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">6–7%</span>
+            <span class="stat-lbl">Expected ABV</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">6wks</span>
+            <span class="stat-lbl">Start to Glass</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">~13</span>
+            <span class="stat-lbl">330ml Bottles</span>
+          </div>
+        </div>
+      </div>
+      <div class="header-illustration">
+        <svg width="180" height="220" viewBox="0 0 180 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Demijohn illustration -->
+          <ellipse cx="90" cy="52" rx="22" ry="10" fill="#F5EDD9"/>
+          <rect x="68" y="48" width="44" height="8" rx="4" fill="#F5EDD9"/>
+          <path d="M60 68 Q50 90 50 130 Q50 175 90 180 Q130 175 130 130 Q130 90 120 68 Z" fill="#C17B2C" opacity="0.7"/>
+          <path d="M68 60 L112 60 L120 68 L60 68 Z" fill="#D4924A" opacity="0.6"/>
+          <!-- liquid level -->
+          <path d="M55 120 Q60 115 90 118 Q120 115 125 120 L130 140 Q130 175 90 180 Q50 175 50 140 Z" fill="#8B3A1F" opacity="0.5"/>
+          <!-- bubbles -->
+          <circle cx="75" cy="148" r="3" fill="#F0C97A" opacity="0.6"/>
+          <circle cx="92" cy="135" r="2" fill="#F0C97A" opacity="0.5"/>
+          <circle cx="108" cy="155" r="2.5" fill="#F0C97A" opacity="0.55"/>
+          <!-- airlock -->
+          <rect x="83" y="30" width="14" height="20" rx="2" fill="#F5EDD9" opacity="0.8"/>
+          <circle cx="90" cy="24" r="6" fill="#F5EDD9" opacity="0.8"/>
+          <!-- apple decoration -->
+          <circle cx="148" cy="40" r="18" fill="#C17B2C" opacity="0.5"/>
+          <path d="M148 22 Q153 14 152 8" stroke="#3D6B35" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M152 8 Q158 4 162 6" stroke="#3D6B35" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <circle cx="30" cy="170" r="14" fill="#3D6B35" opacity="0.35"/>
+          <circle cx="38" cy="165" r="10" fill="#527A49" opacity="0.3"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="header-wave"></div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#intro">The Basics</a>
+      <a href="#hardware">Hardware</a>
+      <a href="#materials">Ingredients</a>
+      <a href="#steps">Method</a>
+      <a href="#reference">Reference</a>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main>
+
+  <!-- INTRO -->
+  <section id="intro">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Before You Start</span>
+        <span class="section-rule"></span>
+      </div>
+      <h2>Why Non-Nitrate Juice<br>and EC-1118?</h2>
+      <div class="tile-grid intro-tiles-grid">
+      <div class="tile">
+        <h3 class="tile-name">Non-Nitrate Juice is Critical</h3>
+        <p class="tile-desc">Preservatives like potassium sorbate, sodium benzoate, or potassium metabisulfite kill or suppress yeast. If these are in your juice, it simply will not ferment. Always check the ingredients label — use only juice marked as 100% juice with no preservatives. Ascorbic acid (vitamin C) is fine and does not affect fermentation.</p>
+      </div>
+      <div class="tile">
+        <h3 class="tile-name">EC-1118 Champagne Yeast</h3>
+        <p class="tile-desc">It ferments fast, tolerates low nutrients, and is highly alcohol-tolerant. It will drive your cider bone dry to around 1.000 SG or lower, giving roughly 6 to 7 percent ABV from standard apple juice. If you want residual sweetness, you must backsweeten after fermentation is fully complete — stabilise first with Campden plus potassium sorbate, then add sugar or non-fermentable sweetener to taste.</p>
+      </div>
+      <div class="tile">
+        <h3 class="tile-name">Headspace is Not Optional</h3>
+        <p class="tile-desc">The 0.5L headspace in a 5L demijohn is not optional. EC-1118 ferments vigorously. Without headspace the krausen foam will blow straight through your airlock and onto the floor.</p>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HARDWARE -->
+  <section id="hardware">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Equipment</span>
+        <span class="section-rule"></span>
+      </div>
+      <div class="section-intro-box">
+        <h2>Hardware You Need</h2>
+        <p class="section-intro">Sanitize everything that will touch juice or cider after brew day begins. No-rinse sanitizer is safest and removes guesswork.</p>
+      </div>
+<div class="tile-grid">
+        <a href="https://amzn.to/3QaISuf" target="_blank" rel="noopener" class="tile-link">
+        <div class="tile">
+          <div class="tile-img-wrapper">
+            <img src="https://m.media-amazon.com/images/I/71VngNr6vyL._AC_SL1500_.jpg" alt="1 Gallon Demijohn">
+          </div>
+          <h3 class="tile-name">1 Gallon Demijohn</h3>
+          <p class="tile-desc">Use for a 4.5L batch to preserve 0.5L headspace. Glass or PET both work — vessel must be at least 5L total.</p>
+          <span class="shop-btn">Shop Now</span>
+        </div>
+        </a>
+        <a href="https://amzn.to/4cxHSIi" target="_blank" rel="noopener" class="tile-link">
+        <div class="tile">
+          <div class="tile-img-wrapper">
+            <img src="https://m.media-amazon.com/images/I/61fe5ybBBpL._AC_SL1000_.jpg" alt="Rubber Bung plus Airlock">
+          </div>
+          <h3 class="tile-name">Rubber Bung + Airlock</h3>
+          <p class="tile-desc">Seals the demijohn and vents CO2. Use a blow-off tube for the first 48h if foam is expected to be high. Fill airlock to the line with sanitizer or vodka.</p>
+          <span class="shop-btn">Shop Now</span>
+        </div>
+        </a>
+        <a href="https://amzn.to/4tMjaun" target="_blank" rel="noopener" class="tile-link">
+        <div class="tile">
+          <div class="tile-img-wrapper">
+            <img src="https://m.media-amazon.com/images/I/61urnETdopL._SL1500_.jpg" alt="Funnel">
+          </div>
+          <h3 class="tile-name">Funnel</h3>
+          <p class="tile-desc">For pouring juice into the demijohn without spills. Must fit the neck. Sanitize before use.</p>
+          <span class="shop-btn">Shop Now</span>
+        </div>
+        </a>
+        <a href="https://amzn.to/4tMjlWz" target="_blank" rel="noopener" class="tile-link">
+        <div class="tile">
+          <div class="tile-img-wrapper">
+            <img src="https://m.media-amazon.com/images/I/51sxkGr1asL._AC_SL1001_.jpg" alt="Auto Siphon plus Tubing">
+          </div>
+          <h3 class="tile-name">Auto Siphon + Tubing</h3>
+          <p class="tile-desc">For racking and bottling without disturbing sediment. 3/8 inch tubing is standard. Mini auto-siphon fits 1 gallon demijohns best.</p>
+          <span class="shop-btn">Shop Now</span>
+        </div>
+        </a>
+        <a href="https://amzn.to/4c9qlaf" target="_blank" rel="noopener" class="tile-link">
+        <div class="tile">
+          <div class="tile-img-wrapper">
+            <img src="https://m.media-amazon.com/images/I/71EDNiNlPbL._AC_SL1500_.jpg" alt="Hydrometer plus Trial Jar">
+          </div>
+          <h3 class="tile-name">Hydrometer + Trial Jar</h3>
+          <p class="tile-desc">Measures gravity to track fermentation and confirming it's done. Trial jar makes sampling easy without contamination.</p>
+          <span class="shop-btn">Shop Now</span>
+        </div>
+        </a>
+        <a href="https://amzn.to/4vvJScx" target="_blank" rel="noopener" class="tile-link">
+        <div class="tile">
+          <div class="tile-img-wrapper">
+            <img src="https://m.media-amazon.com/images/I/41Hd8h5PT-L._AC_.jpg" alt="No Rinse Sanitizer">
+          </div>
+          <h3 class="tile-name">No-Rinse Sanitizer</h3>
+          <p class="tile-desc">Star San or IO Star. Mix with water, soak, and air dry. No rinse needed. Kills bacteria and wild yeast on contact.</p>
+          <span class="shop-btn">Shop Now</span>
+        </div>
+        </a>
+        <a href="https://amzn.to/3Q1BhhF" target="_blank" rel="noopener" class="tile-link">
+        <div class="tile">
+          <div class="tile-img-wrapper">
+            <img src="https://m.media-amazon.com/images/I/51pwDjL0xNL._AC_SL1080_.jpg" alt="Bottles plus Crown Caps">
+          </div>
+          <h3 class="tile-name">330ml Beer Bottles + Caps</h3>
+          <p class="tile-desc">Reuse old beer bottles or buy new. Crown caps seal best — flip caps are handy but can let air in over months.</p>
+          <span class="shop-btn">Shop Now</span>
+        </div>
+        </a>
+        <a href="https://amzn.to/4mw2x3Y" target="_blank" rel="noopener" class="tile-link">
+        <div class="tile">
+          <div class="tile-img-wrapper">
+            <img src="https://m.media-amazon.com/images/I/519eY4+Z4LL._AC_SL1000_.jpg" alt="Capper">
+          </div>
+          <h3 class="tile-name">Capper</h3>
+          <p class="tile-desc">Two-handled bench capper for crown caps. Lay-down capper works but needs a bench to brace against.</p>
+          <span class="shop-btn">Shop Now</span>
+        </div>
+        </a>
+        <a href="https://amzn.to/4tGWVpH" target="_blank" rel="noopener" class="tile-link">
+        <div class="tile">
+          <div class="tile-img-wrapper">
+            <img src="https://m.media-amazon.com/images/I/617k9kuoqnL._SL1000_.jpg" alt="Thermometer Strip">
+          </div>
+          <h3 class="tile-name">Thermometer Strip</h3>
+          <p class="tile-desc">Stick-on strip to monitor fermentation temperature. EC-1118 is happy from 10–30°C but flavours are cleanest at 18–20°C.</p>
+          <span class="shop-btn">Shop Now</span>
+        </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATERIALS -->
+  <section id="materials">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Raw Materials</span>
+        <span class="section-rule"></span>
+      </div>
+      <div class="section-intro-box">
+        <h2>What Goes In the Demijohn</h2>
+        <p class="section-intro">All measurements are for a 4.5L batch. Double everything for a full 9L or 2-gallon run.</p>
+      </div>
+      <div class="tile-grid">
+        <a href="https://amzn.to/4mw2x3Y" target="_blank" rel="noopener" class="tile-link">
+        <div class="tile">
+          <div class="tile-img-wrapper">
+            <img src="https://m.media-amazon.com/images/I/61te6HwnNcL._AC_SL1020_.jpg" alt="Non-nitrate apple juice">
+          </div>
+          <h3 class="tile-name">Non-preservative apple juice</h3>
+          <p class="tile-desc">4.5L. Ingredients must show no potassium sorbate or sodium benzoate. Cloudy or clear both ferment fine. Ascorbic acid is harmless.</p>
+          <span class="shop-btn">Shop Now</span>
+        </div>
+        </a>
+        <a href="https://amzn.to/4cbpjL1" target="_blank" rel="noopener" class="tile-link">
+        <div class="tile">
+          <div class="tile-img-wrapper">
+            <img src="https://m.media-amazon.com/images/I/71fYGgG5M7L._AC_SL1500_.jpg" alt="Lalvin EC-1118">
+          </div>
+          <h3 class="tile-name">Lalvin EC-1118 yeast</h3>
+          <p class="tile-desc">1 × 5g sachet. Champagne yeast. Rehydrate in 50ml of 35°C water for 15 min before pitching. One sachet is the right amount for 4.5L.</p>
+          <span class="shop-btn">Shop Now</span>
+        </div>
+        </a>
+        <a href="https://amzn.to/3QCqiey" target="_blank" rel="noopener" class="tile-link">
+        <div class="tile">
+          <div class="tile-img-wrapper">
+            <img src="https://m.media-amazon.com/images/I/61jDt83gCGL._AC_SL1200_.jpg" alt="Yeast nutrient">
+          </div>
+          <h3 class="tile-name">Yeast nutrient</h3>
+          <p class="tile-desc">½ tsp (2.5g). Add at the start. Prevents sulfur or egg aromas that fast fermenters like EC-1118 can produce. Do not skip for juice-based cider.</p>
+          <span class="shop-btn">Shop Now</span>
+        </div>
+        </a>
+        <a href="https://amzn.to/41yIRmf" target="_blank" rel="noopener" class="tile-link">
+        <div class="tile">
+          <div class="tile-img-wrapper">
+            <img src="https://m.media-amazon.com/images/I/61trh6sX8xL._AC_SL1200_.jpg" alt="Pectic enzyme">
+          </div>
+          <h3 class="tile-name">Pectic enzyme</h3>
+          <p class="tile-desc">½ tsp (2.5ml). Add to juice 12–24h before pitching yeast. Breaks pectin haze for clearer finished cider. Stir in and leave.</p>
+          <span class="shop-btn">Shop Now</span>
+        </div>
+        </a>
+        <a href="https://amzn.to/3O2xX5h" target="_blank" rel="noopener" class="tile-link">
+        <div class="tile">
+          <div class="tile-img-wrapper">
+            <img src="https://m.media-amazon.com/images/I/51IA4tJW5LL._AC_SL1000_.jpg" alt="Campden tablets">
+          </div>
+          <h3 class="tile-name">Campden tablets</h3>
+          <p class="tile-desc">½ tablet, crushed. Only needed for unpasteurized juice. Add, wait 24h, then pitch yeast. Skip entirely if using pasteurized supermarket juice.</p>
+        </div>
+        </a>
+        <a href="https://amzn.to/3OsUckK" target="_blank" rel="noopener" class="tile-link">
+        <div class="tile">
+          <div class="tile-img-wrapper">
+            <img src="https://m.media-amazon.com/images/I/71iwLQ6MCpL._AC_SL1500_.jpg" alt="Priming sugar">
+          </div>
+          <h3 class="tile-name">Priming sugar</h3>
+          <p class="tile-desc">18–22g total at bottling. Dissolve in 50ml boiling water, cool fully, then mix into cider before bottling. 20g gives approximately 2.4 volumes CO2.</p>
+        </div>
+        </a>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section id="steps">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">The Method</span>
+        <span class="section-rule"></span>
+      </div>
+      <h2>Step by Step — 4.5L Batch</h2>
+      <p class="section-intro">About 30 minutes of active work on brew day, then 3–6 weeks of patient waiting. Sanitize everything that touches the cider from step one onwards.</p>
+      <div class="steps-container">
+
+        <div class="step-card">
+          <div class="step-body">
+            <h3>1. Sanitize Everything</h3>
+            <p>Mix sanitizer in a clean bucket per label instructions. Fully sanitize the demijohn, bung, airlock, funnel, siphon, tubing, trial jar, and hydrometer. Do not rinse if using no-rinse sanitizer — the foam is harmless.</p>
+            <p>Stick the thermometer strip to the demijohn. Position it in its fermentation spot now — somewhere at 18–22°C, out of direct sunlight, where you won't need to move it for two weeks.</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-body">
+            <h3>2. Prepare the Juice</h3>
+            <p>Funnel 4.5L of juice into the sanitized demijohn. Leave a minimum of 0.5L headspace — this is not negotiable.</p>
+            <ul>
+              <li>For unpasteurized juice: crush ½ Campden tablet, add, swirl gently, fit airlock, and wait 24 hours before proceeding</li>
+              <li>For pectic enzyme: add ½ tsp now, swirl to mix, and wait 12–24 hours before pitching yeast</li>
+              <li>Confirm temperature is 18–25°C before adding yeast</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-body">
+            <h3>3. Record Original Gravity + Add Nutrient</h3>
+            <p>Sanitize your trial jar and hydrometer. Draw a sample from the demijohn into the trial jar, float the hydrometer, and record the OG. Expect 1.045–1.055 for plain supermarket juice. Return the sample or drink it — your choice.</p>
+            <p>Add ½ tsp of yeast nutrient to the demijohn. Swirl gently to dissolve.</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-body">
+            <h3>4. Rehydrate and Pitch Yeast</h3>
+            <p>In a sanitized cup, measure 50ml of clean water at 35°C. Sprinkle EC-1118 onto the surface and wait 15 minutes without stirring, then stir gently. It should look creamy and active.</p>
+            <p>Pour the yeast slurry into the demijohn. Fit the bung and airlock — fill the airlock to the mark with sanitizer or vodka. For the first 48 hours, a blow-off tube into a jar of sanitizer is a sensible precaution if you expect vigorous foam.</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-body">
+            <h3>5. Primary Fermentation — 7 to 14 Days</h3>
+            <p>Within 12–24 hours you should see bubbles every few seconds in the airlock. Maintain 18–22°C. Do not open the demijohn.</p>
+            <p>After about 7 days, bubbling will noticeably slow. When you reach roughly 1 bubble per minute or less, wait a further 3 days and then check the final gravity.</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-body">
+            <h3>6. Confirm Fermentation is Complete</h3>
+            <p>Sanitize the trial jar and hydrometer. Pull a sample with a sanitized siphon or wine thief. Check the SG on two consecutive days. If it is stable and at or below 1.003, your cider is done.</p>
+            <p>For EC-1118, expect a FG of 0.998–1.000. Calculate ABV using: <strong>131.25 × (OG − FG)</strong>. Example: 1.050 − 1.000 = 6.56% ABV.</p>
+            <div class="inline-calc">
+              <div class="inline-calc-row">
+                <label class="inline-calc-label">OG ie 1.055:</label>
+                <input type="number" id="og-input-inline" class="inline-input" step="0.001" placeholder="1.055">
+              </div>
+              <div class="inline-calc-row">
+                <label class="inline-calc-label">FG ie 1.000:</label>
+                <input type="number" id="fg-input-inline" class="inline-input" step="0.001" placeholder="1.000">
+              </div>
+              <div class="inline-calc-row">
+                <button class="inline-calc-btn" onclick="calculateInlineABV()">Calculate</button>
+                <span class="inline-calc-result" id="abv-result-inline">—</span>
+              </div>
+            </div>
+            <p>Optional: rack into a clean sanitized demijohn and allow to clear for 1–2 weeks. EC-1118 compacts well and this step is often unnecessary.</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-body">
+            <h3>7. Bottle for Carbonation</h3>
+            <p>Sanitize bottles, caps, siphon, tubing, and a small saucepan. Boil 50ml of water and dissolve 18–22g of table sugar or dextrose. Cover and allow to cool fully to room temperature.</p>
+            <p>Gently rack the cider onto the priming solution in a sanitized bottling bucket or clean demijohn. Avoid splashing — oxygen at this stage is the enemy. Stir very gently to incorporate sugar without aerating.</p>
+            <p>Siphon into bottles, leaving 2–3cm headspace. Cap immediately and label with the date.</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-body">
+            <h3>8. Condition and Enjoy</h3>
+            <p>Store bottles at 18–22°C for 2–3 weeks to develop carbonation. To test, chill one bottle for 24 hours then open carefully. If it's flat, leave the remaining bottles for another week.</p>
+            <p>Once carbonated to your liking, move to cool storage or the fridge. Cider improves noticeably over 1–3 months. EC-1118 always ferments dry — expect tart, crisp, and refreshing rather than sweet.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- REFERENCE -->
+  <section id="reference">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Reference</span>
+        <span class="section-rule"></span>
+      </div>
+      <h2>Timeline, Safety &amp; Troubleshooting</h2>
+      <p class="section-intro">Keep this section bookmarked for when things get uncertain — which they will.</p>
+      <div class="ref-grid">
+
+        <div class="ref-card">
+          <div class="ref-card-header">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor" opacity="0.85"><rect x="2" y="2" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 9h6M6 12h4M9 6h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Typical Timeline
+          </div>
+          <div class="ref-card-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>When</th>
+                  <th>Day 0</th>
+                  <th>Days 1–3</th>
+                  <th>Days 4–10</th>
+                  <th>Days 10–14</th>
+                  <th>Weeks 3–4</th>
+                  <th>Weeks 5–7</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Stage</td><td>Brew day</td><td>Active</td><td>Slowing</td><td>Finishing</td><td>Optional clear</td><td>Conditioning</td></tr>
+                <tr><td>What to Expect</td><td>Sanitize, pitch, seal</td><td>Vigorous bubbles, foam layer</td><td>Bubbles reduce, slowly clears</td><td>Check FG twice for stability</td><td>Rack if needed, cold crash helps</td><td>2–3 weeks at room temp in bottle</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-card-header">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.85"><path d="M9 2L2 14h14L9 2z"/><path d="M9 8v3M9 13v.5" stroke-linecap="round"/></svg>
+            Safety Notes
+          </div>
+          <div class="ref-card-body">
+            <ul>
+              <li>Never bottle before fermentation is completely done. Confirm FG is stable below 1.003. Bottle bombs cause serious injury</li>
+              <li>Do not exceed 22g priming sugar for 4.5L — that is approximately 2.6 volumes CO2. More risks dangerous over-carbonation</li>
+              <li>All bottles must be rated for pressure. Beer bottles and champagne bottles only — no wine bottles, no mason jars</li>
+              <li>Sanitize everything that touches cider after brew day. One dirty implement can destroy an entire batch</li>
+              <li>EC-1118 is aggressive. It will blow through airlocks if you overfill. Always preserve adequate headspace</li>
+              <li>Sulfur or egg smell usually means yeast stress. Yeast nutrient prevents it. It often dissipates with age and aeration at serving</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-card-header">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.85"><circle cx="9" cy="9" r="7"/><path d="M9 6a2 2 0 0 1 2 2c0 1.5-2 2-2 3.5M9 14v.5" stroke-linecap="round"/></svg>
+            Troubleshooting
+          </div>
+          <div class="ref-card-body">
+            <ul>
+              <li><strong>No bubbles after 24h:</strong> Check the bung seal and temperature. If still nothing, check your juice label for preservatives — then repitch fresh yeast</li>
+              <li><strong>Cloudy cider:</strong> Time resolves most haze. Cold crash at 2–4°C for 3–5 days, or use pectic enzyme before pitching next time</li>
+              <li><strong>Too dry or sour:</strong> EC-1118 always finishes dry. To backsweeten, stabilize with Campden plus potassium sorbate, then add sugar to taste</li>
+              <li><strong>Flat bottles:</strong> Too cold, too little priming sugar, or spent yeast. Warm to 21°C for another week and invert gently to rouse the yeast</li>
+              <li><strong>Gushers or over-carbed:</strong> Fermentation was incomplete when bottled, or too much sugar. Chill all bottles immediately, open with care, refrigerate and consume quickly</li>
+              <li><strong>Vinegar smell:</strong> Acetobacter infection — typically from poor sanitation or oxygen exposure. Improve technique next batch. This batch is usually lost</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">The Orchard in a Bottle</div>
+  <p>This guide is for educational home brewing purposes. Brew responsibly and in accordance with local laws.</p>
+  <p>ABV formula: 131.25 × (Original Gravity − Final Gravity) &nbsp;·&nbsp; Product links are illustrative examples only.</p>
+  <p style="margin-top:12px; font-size:0.78rem; opacity:0.5;">Always verify preservative-free status on juice labels before purchase.</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const ogInput = document.getElementById('og-input-inline');
+  const fgInput = document.getElementById('fg-input-inline');
+
+  function calculateInlineABV() {
+    const ogStr = ogInput.value.trim();
+    const fgStr = fgInput.value.trim();
+    const og = ogStr ? parseFloat(ogStr) : NaN;
+    const fg = fgStr ? parseFloat(fgStr) : NaN;
+    const resultEl = document.getElementById('abv-result-inline');
+    
+    if (isNaN(og) || isNaN(fg)) {
+      resultEl.textContent = '—';
+      return;
+    }
+    
+    if (fg >= og) {
+      resultEl.textContent = 'err';
+      return;
+    }
+    
+    const abv = 131.25 * (og - fg);
+    resultEl.textContent = abv.toFixed(1) + '%';
+  }
+
+  window.calculateInlineABV = calculateInlineABV;
+
+  [ogInput, fgInput].forEach(function(input) {
+    input.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') calculateInlineABV();
+    });
+  });
+});
+</script>
+
+</body>
+</html>
